@@ -10,7 +10,7 @@ export default class Model {
     
     constructor() { }
     
-    private execQuery(query: string) {
+    static execQuery(query: string) {
         let result = new Promise((resolve, reject) => {
             Model.dbc.query(query, (err: any, rows: any, fields: any) => {
                 if (err) { reject(err); }
@@ -21,8 +21,8 @@ export default class Model {
         return result;
     }
 
-/*
-    static select (table: string, attr: string) {
+
+    /*static select (table: string, attr: string) {
         const query = `SELECT ${attr} from ${table}`;
         this.execQuery(query);
     }

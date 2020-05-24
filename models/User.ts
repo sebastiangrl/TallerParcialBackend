@@ -1,50 +1,69 @@
+import { ModelI } from "../interfaces/ModelI";
+import Model from "../libs/Model";
 
-export default class User {
+export default class User extends Model implements ModelI{
 
-    private id: number;
-    private name: string;
-    private clan: string;
-    private password: number;
+    id: number  | null = null;
+    username: string;
+    clan: string;
+    password: string;
 
-    constructor(id: number, name: string, clan: string, password: number) {
-        //super();
-        this.id = id;
-        this.name = name;
+    constructor( username: string, clan: string, password: string ){
+        super();
+        this.username = username;
         this.clan = clan;
         this.password = password;
     }
 
-
-    getId() {
+    getId(){
         return this.id;
     }
 
-    setId(value: number) {
-        this.id = value;
+    getUsername(){
+        return this.username;
     }
 
-    getName() {
-        return this.name;
-    }
-
-    setName(value: string) {
-        this.name = value;
-    }
-
-    getClan() {
+    getClan(){
         return this.clan;
     }
 
-    setClan(value: string) {
-        this.clan = value;
-    }
-
-    getPassword() {
+    getPassword(){
         return this.password;
     }
 
-    setPassword(value: number) {
-        this.password = value;
+    setId( id: number ){
+        this.id = id;
+    }
+
+    setUsername( username: string ){
+        this.username = username;
+    }
+
+    setClan( clan: string ){
+        this.clan = clan;
+    }
+
+    setPassword( password: string ){
+        this.password = password;
+    }
+
+    static findAll() {
+        const query = 'SELECT * from rest.god';
+        const result = Model.execQuery(query);
+        return result;
+    }
+    
+    findOne(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    create(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    update(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    delete(): Promise<any> {
+        throw new Error("Method not implemented.");
     }
 
 }

@@ -1,90 +1,141 @@
 
-export default class Accessory {
+import { ModelI } from "../interfaces/ModelI";
+import Model from "../libs/Model";
 
-    private name: string;
-    private price: number;
-    private damage: number;
-    private precision: number;
-    private cadence: number;
-    private mobility: number;
-    private control: number;
-    private level: number;
+export default class Accessory extends Model implements ModelI{
 
-    constructor(name: string, price: number, damage: number, precision: number, cadence: number, mobility: number, control: number, level: number) {
-        //super();
+    id: number | null = null;
+    name: string;
+    damage: number;
+    precision: number;
+    scope: number;
+    cadence: number;
+    mobility: number;
+    control: number;
+    level: number;
+    type: string;
+    price: number;
+    
+    constructor(name: string, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string, price: number){
+        super();
         this.name = name;
-        this.price = price;
         this.damage = damage;
         this.precision = precision;
+        this.scope = scope;
         this.cadence = cadence;
         this.mobility = mobility;
         this.control = control;
         this.level = level;
+        this.type = type;
+        this.price = price;
     }
 
+    getId(){
+        return this.id;
+    }
 
-    getName() {
+    getName(){
         return this.name;
     }
 
-    setName(value: string) {
-        this.name = value;
-    }
-
-    getPrice() {
-        return this.price;
-    }
-
-    setPrice(value: number) {
-        this.price = value;
-    }
-
-    getDamage() {
+    getDamage(){
         return this.damage;
     }
 
-    setDamage(value: number) {
-        this.damage = value;
-    }
-
-    getCadence() {
-        return this.cadence;
-    }
-
-    setCadence(value: number) {
-        this.cadence = value;
-    }
-
-    getPrecision() {
+    getPrecision(){
         return this.precision;
     }
 
-    setPrecision(value: number) {
-        this.precision = value;
+    getScope(){
+        return this.scope;
     }
 
-    getMobility() {
+    getCadence(){
+        return this.cadence;
+    }
+
+    getMobility(){
         return this.mobility;
     }
 
-    setMobility(value: number) {
-        this.mobility = value;
-    }
-
-    getControl() {
+    getControl(){
         return this.control;
     }
 
-    setControl(value: number) {
-        this.control = value;
-    }
-
-    getLevel() {
+    getLevel(){
         return this.level;
     }
 
-    setLevel(value: number) {
-        this.level = value;
+    getType(){
+        return this.type;
     }
+
+    getPrice(){
+        return this.price;
+    }
+
+    setId( id: number  ){
+        this.id = id;
+    }
+
+    setName( name: string ){
+        this.name = name;
+    }
+
+    setDamage( damage: number ){
+        this.damage = damage;
+    }
+
+    setPrecision( precision: number ){
+        this.precision = precision;
+    }
+
+    setScope( scope: number ){
+        this.scope = scope;
+    }
+
+    setCadence( cadence: number ){
+        this.cadence = cadence;
+    }
+
+    setMobility( mobility: number ){
+        this.mobility = mobility;
+    }
+
+    setControl( control: number ){
+        this.control = control;
+    }
+
+    setLevel( level: number ){
+        this.level = level;
+    }
+
+    setType( type: string ){
+        this.type = type;
+    } 
+
+    setPrice( price: number ){
+        this.price = price;
+    }
+
+    static findAll() {
+        const query = 'SELECT * from rest.god';
+        const result = Model.execQuery(query);
+        return result;
+    }
+    
+    findOne(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    create(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    update(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    delete(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+
 
 }

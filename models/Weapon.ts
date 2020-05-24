@@ -1,83 +1,93 @@
-import Model from '../libs/Model';
-import { ModelI } from '../interfaces/ModelI';
+import { ModelI } from "../interfaces/ModelI";
+import Accessory from "./Accessory";
 
-export default class Weapon extends Model implements ModelI{
+export default class Weapon implements ModelI{
 
-    private name: string;
-    private price: number;
-    private model: string;
-    private accessory: string;
-    private damage: number;
+    id: number | null = null;
+    name: string;
+    price: number;
+    model: string;
+    accessory: Array<Accessory>;
+    damage: number;
+    kills: number;
 
-    constructor(name: string, price: number, model: string, accessory: string, damage: number) {
-        super();
+    constructor(name: string, price: number, model: string, accessory: Array<Accessory>, damage: number, kills: number){
         this.name = name;
         this.price = price;
         this.model = model;
         this.accessory = accessory;
         this.damage = damage;
+        this.kills = kills;
     }
 
-    static findAll() {
-        const query = 'SELECT * from rest.god';
-        const result = Model.execQuery(query);
-        return result;
+    getId(){
+        return this.id;
     }
 
-    create() {
-        const query = `INSERT INTO rest.god (name, origin) VALUES ('${this.name}','${this.origin}')`;
-        const result = Model.execQuery(query);
-        return result;
-    }
-
-    update(): Promise<any> {
-        return new Promise(()=>{});
-    }
-
-    delete(): Promise<any> {
-        return new Promise(()=>{});
-    }
-
-
-    //Getts nd Setts
-    getName() {
+    getName(){
         return this.name;
     }
 
-    setName(value: string) {
-        this.name = value;
-    }
-
-    getPrice() {
+    getPrice(){
         return this.price;
     }
-
-    setPrice(value: number) {
-        this.price = value;
-    }
-
-    getModel() {
+    
+    getModel(){
         return this.model;
     }
 
-    setModel(value: string) {
-        this.model = value;
-    }
-
-    getAccessory() {
+    getAccessory(){
         return this.accessory;
     }
 
-    setAccessory(value: string) {
-        this.accessory = value;
-    }
-
-    getDamage() {
+    getDamage(){
         return this.damage;
     }
 
-    setDamage(value: number) {
-        this.damage = value;
+    getKills(){
+        return this.kills;
     }
+
+    setId( id: number ){
+        this.id = id;
+    }
+
+    setName( name: string ){
+        this.name = name;
+    }
+
+    setPrice( price: number ){
+        this.price = price;
+    }
+
+    setModel( model: string ){
+        this.model = model;
+    }
+
+    setAccessory( accessory: Accessory ){
+        this.accessory.push(accessory);
+    }
+
+    setDamage(damage: number){
+        this.damage = damage;
+    }
+
+    setKills(kills: number){
+        this.kills = kills;
+    }
+    
+    findOne(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    create(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    update(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    delete(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+
 
 }

@@ -1,15 +1,18 @@
+import { ModelI } from "../interfaces/ModelI";
+import Model from "../libs/Model";
 
-export default class Armor {
+export default class Armor extends Model implements ModelI{
+    
+    id: number | null = null;
+    name: string;
+    price: number;
+    weight: number;
+    mobility: number;
+    protection: number;
+    type: string;
 
-    private name: string;
-    private price: number;
-    private weight: number;
-    private mobility: number;
-    private protection: number;
-    private type: string;
-
-    constructor(name: string, price: number, weight: number, mobility: number, protection: number, type: string) {
-        //super();
+    constructor( name: string, price: number, weight: number, mobility: number, protection: number, type: string ){
+        super();
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -18,53 +21,81 @@ export default class Armor {
         this.type = type;
     }
 
-
-    getName() {
+    
+    getId(){
+        return this.id;
+    }
+    
+    getName(){
         return this.name;
     }
 
-    setName(value: string) {
-        this.name = value;
-    }
-
-    getPrice() {
+    getPrice(){
         return this.price;
     }
 
-    setPrice(value: number) {
-        this.price = value;
-    }
-
-    getWeight() {
+    getWeight(){
         return this.weight;
     }
 
-    setWeight(value: number) {
-        this.weight = value;
-    }
-
-    getMobility() {
+    getMobility(){
         return this.mobility;
     }
 
-    setMobility(value: number) {
-        this.mobility = value;
-    }
-
-    getProtection() {
+    getProtection(){
         return this.protection;
     }
 
-    setProtection(value: number) {
-        this.protection = value;
-    }
-
-    getType() {
+    getType(){
         return this.type;
     }
 
-    setType(value: string) {
-        this.type = value;
+    setId( id: number ){
+        return this.id;
     }
+
+    setName( name: string ){
+        this.name = name;
+    }
+
+    setPrice( price: number ){
+        this.price = price;
+    }
+
+    setWeight( weight: number ){
+        this.weight = weight;
+    }
+
+    setMobility( mobility: number ){
+        this.mobility = mobility;
+    }
+
+    setProtection( protection: number ){
+        this.protection = protection;
+    }
+
+    setType( type: string ){
+        this.type = type;
+    }
+    
+    static findAll() {
+        const query = 'SELECT * from rest.god';
+        const result = Model.execQuery(query);
+        return result;
+    }
+
+    findOne(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    create(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    update(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+    delete(): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
+
 
 }

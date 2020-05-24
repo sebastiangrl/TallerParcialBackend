@@ -22,13 +22,13 @@ module WeaponsService {
     }*/
 
     //Arma personalizada
-    export async function create(name: string, origin: string): Promise<any> {
+    /*export async function update(name: string, origin: string): Promise<any> {
         const god = new God(name, origin);
         const response = await god.create();
         if (response) {
             return god;
         }
-    }
+    }*/
 
     //Obtener arma por precio
     export function getByPrice(price: number): Weapon {

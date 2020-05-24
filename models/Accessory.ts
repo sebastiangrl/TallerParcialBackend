@@ -4,6 +4,7 @@ export default class Accessory implements crud{
 
     id: number | null = null;
     name: string;
+    price: number;
     damage: number;
     precision: number;
     scope: number;
@@ -11,16 +12,19 @@ export default class Accessory implements crud{
     mobility: number;
     control: number;
     level: number;
+    type: string;
     
-    constructor(name: string, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number){
+    constructor(name: string, damage: number, price: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string ){
         this.name = name;
         this.damage = damage;
+        this.price = price;
         this.precision = precision;
         this.scope = scope;
         this.cadence = cadence;
         this.mobility = mobility;
         this.control = control;
         this.level = level;
+        this.type = type;
     }
 
     getId(){
@@ -33,6 +37,10 @@ export default class Accessory implements crud{
 
     getDamage(){
         return this.damage;
+    }
+
+    getPrice(){
+        return this.price;
     }
 
     getPrecision(){
@@ -59,6 +67,10 @@ export default class Accessory implements crud{
         return this.level;
     }
 
+    getType(){
+        return this.type;
+    }
+
     setId( id: number  ){
         this.id = id;
     }
@@ -69,6 +81,10 @@ export default class Accessory implements crud{
 
     setDamage( damage: number ){
         this.damage = damage;
+    }
+
+    setPrice( price: number ){
+        this.price = price;
     }
 
     setPrecision( precision: number ){
@@ -93,6 +109,10 @@ export default class Accessory implements crud{
 
     setLevel( level: number ){
         this.level = level;
+    }
+
+    setType( type: string){
+        this.type = type;
     }
 
     findOne(): Promise<any> {

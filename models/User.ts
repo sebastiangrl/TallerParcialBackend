@@ -45,7 +45,7 @@ export default class User implements crud{
         this.password = password;
     }
     
-    findOne(): Promise<any> {
+    read(): Promise<any> {
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {

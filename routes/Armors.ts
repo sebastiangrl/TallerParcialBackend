@@ -1,12 +1,12 @@
 import express from "express";
-import * as WeaponsController from "../controllers/WeaponsController";
+import * as ArmorController from "../controllers/ArmorController";
 
-module weaponsRouter {
+module ArmorsRouter {
 
     export function getRoutes() {
         let router: any = express.Router();
         router.route('/')
-            .get('/', )
+            .get(`/bar`, ArmorController.armors)
             .post('/', )
             .put('/', )
             .delete('/', );
@@ -15,4 +15,4 @@ module weaponsRouter {
 
 }
 
-export default weaponsRouter;
+export default ArmorsRouter;

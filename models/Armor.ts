@@ -1,4 +1,6 @@
 import { crud } from "../interfaces/crud";
+import Model from "../libs/Model";
+import { bd } from "../conf"
 
 export default class Armor implements crud{
     
@@ -76,17 +78,25 @@ export default class Armor implements crud{
         this.type = type;
     }
 
-    findOne(): Promise<any> {
-        throw new Error("Method not implemented.");
+    read(id :number): Promise<any> {
+        const query = `SELECT * from ${bd}.armor WHERE id = ${id}`;
+        const result = Model.execQuery(query);
+        return result;
     }
     create(): Promise<any> {
-        throw new Error("Method not implemented.");
+        const query = `INSERT INTO ${bd}.armor (name, price, weight, mobility, protection, type) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, '${this.type}')`;
+        const result = Model.execQuery(query);
+        return result;
     }
     update(): Promise<any> {
-        throw new Error("Method not implemented.");
+        const query = `UPDATE ${bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}') WHERE ${bd}.armor.id = ${this.id}`;
+        const result = Model.execQuery(query);
+        return result;
     }
     delete(): Promise<any> {
-        throw new Error("Method not implemented.");
+        const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
+        const result = Model.execQuery(query);
+        return result;
     }
 
 

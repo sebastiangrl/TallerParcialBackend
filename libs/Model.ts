@@ -7,7 +7,7 @@ export default class Model {
         password: ''
     }); 
 
-    constructor() {}
+    private constructor() {}
 
     static execQuery(query: string) {
         let result = new Promise((resolve, reject) => {
@@ -18,5 +18,9 @@ export default class Model {
         });
 
         return result;
+    }
+
+    getConnection(){
+
     }
 }

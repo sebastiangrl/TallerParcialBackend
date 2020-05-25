@@ -115,7 +115,7 @@ export default class Accessory implements crud{
         this.type = type;
     }
 
-    findOne(): Promise<any> {
+    read(): Promise<any> {
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {

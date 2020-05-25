@@ -5,13 +5,15 @@ import { bd } from "../conf";
 module ArmorService{
 
     export function getByType(type: string): Promise<any> {
-
-        return new Promise(()=>{});
+        const query = `SELECT * from ${bd}.armor WHERE type LIKE '%${type}%' `;
+        const result = Model.execQuery(query);
+        return result;
     };
 
     export function getByProtection(min: number, max: number): Promise<any> {
-
-        return new Promise(()=>{});
+        const query = `SELECT * from ${bd}.armor WHERE protection BETWEEN ${min} and ${max}`;
+        const result = Model.execQuery(query);
+        return result;
     };
 
     export function getAll(): Promise<any> {
@@ -21,8 +23,9 @@ module ArmorService{
     };
 
     export function getByPrice(min: number, max: number): Promise<any> {
-
-        return new Promise(()=>{});
+        const query = `SELECT * from ${bd}.armor WHERE price BETWEEN ${min} and ${max}`;
+        const result = Model.execQuery(query);
+        return result;
     };
 
 }

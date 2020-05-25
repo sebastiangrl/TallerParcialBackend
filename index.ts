@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
 });
 
 app.route('/armor').get(ArmorController.armors);
+app.route('/price').get(ArmorController.getByPrice);
+app.route('/type').get(ArmorController.getByType);
 
 app.listen(port, () => {
     console.log(`Node JS Server started at port ${port}`);

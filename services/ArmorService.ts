@@ -4,6 +4,12 @@ import { bd } from "../conf";
 
 module ArmorService{
 
+    export function create(type: string): Promise<any> {
+        const query = `SELECT * from ${bd}.armor WHERE type LIKE '%${type}%' `;
+        const result = Model.execQuery(query);
+        return result;
+    };
+
     export function getByType(type: string): Promise<any> {
         const query = `SELECT * from ${bd}.armor WHERE type LIKE '%${type}%' `;
         const result = Model.execQuery(query);

@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import {port} from "./conf"
 var ArmorsRouter = require("./routes/Armors");
+var UsersRouter = require("./routes/Users");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 
 //Rutas
 app.use('/armor', ArmorsRouter);
+app.use('/user', UsersRouter);
 
 app.listen(port, () => {
     console.log(`Node JS Server started at port ${port}`);

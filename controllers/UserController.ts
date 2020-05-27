@@ -1,14 +1,22 @@
 import { Request, Response} from "express";
 import UserService from "../services/UserService";
 
+
+
+export async function createUser(req: Request, res: Response){
+    const user: any = await UserService.create(req.body.username, req.body.clan, req.body.password);
+    res.status(200).json(user);
+}
+
+
 export async function users(req: Request, res: Response){
     const user: any = await UserService.getAll();
     res.status(200).json(user);
 }
 
 //consume api amiga.
-export async function UserRank(req: Request, res: Response){
-    const user: any = await UserService.UserRank(req.body.id);
+export async function getByRank(req: Request, res: Response){
+    const user: any = await UserService.getByRank(req.body.id);
     res.status(200).json(user);
 }
 

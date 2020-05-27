@@ -1,4 +1,5 @@
 import { crud } from "../interfaces/crud";
+import Model from "../libs/Model";
 
 export default class User implements crud{
 
@@ -49,8 +50,10 @@ export default class User implements crud{
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {
-        throw new Error("Method not implemented.");
+        const query = Model.create("users",`(username, clan, password) VALUES ('${this.username}', '${this.clan}', '${this.password}')`);
+        return query;
     }
+
     update(): Promise<any> {
         throw new Error("Method not implemented.");
     }

@@ -9,6 +9,4 @@ import * as UserController from "../controllers/UserController";
             router.get('/clan', UserController.getByClan),
             router.get('/rank', UserController.getByRank)
             
-
-
 module.exports = router;

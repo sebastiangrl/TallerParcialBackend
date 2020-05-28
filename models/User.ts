@@ -1,4 +1,8 @@
 import { crud } from "../interfaces/crud";
+<<<<<<< HEAD
+=======
+import Model from "../libs/Model";
+>>>>>>> Sebas
 
 export default class User implements crud{
 
@@ -49,8 +53,15 @@ export default class User implements crud{
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {
+<<<<<<< HEAD
         throw new Error("Method not implemented.");
     }
+=======
+        const query = Model.create("users",`(username, clan, password) VALUES ('${this.username}', '${this.clan}', '${this.password}')`);
+        return query;
+    }
+
+>>>>>>> Sebas
     update(): Promise<any> {
         throw new Error("Method not implemented.");
     }

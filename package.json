@@ -4,9 +4,13 @@
   "description": "Api que consume datos de una api externa",
   "main": "index.ts",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon dist/index.js",
     "build": "tsc"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> Sebas
   },
   "repository": {
     "type": "git",

@@ -47,9 +47,9 @@ export default class Model {
         return result;
     }
 
-    public static delete(table: string, attr: string, values: string) {
+    public static delete(table: string, id: number) {
         Model.getConnection();
-        const query = `DELETE FROM ${bd}.${table} WHERE ${bd}.${table}.${attr}. = ${values}`;
+        const query = `DELETE FROM ${bd}.${table} WHERE id = ${id}`;
         const result = this.execQuery(query);
         return result;
     }

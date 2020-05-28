@@ -96,11 +96,9 @@ export default class Armor implements crud{
         return result;
     }
 
+    //reparar
     delete(): Promise<any> {
-        //(table: string, attr: string, values: string)
-        const query = Model.delete("armor","id",`${this.id}`);
-        //const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
-        //const result = Model.execQuery(query);
+        const query = Model.delete("armor", 1);
         return query;
     }
 

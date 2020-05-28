@@ -24,7 +24,7 @@ import Policies from "../sso/Policies";
                     next();
                 }
             }, ArmorController.createArmors),
-            router.put('/update', (req, res, next) => {
+            router.delete('/delete', (req, res, next) => {
                 let error = false;
                 const host: string | undefined = req.headers.host;
                 if (!Policies.verifyHost(host, 'localhost:3000')) {
@@ -42,11 +42,12 @@ import Policies from "../sso/Policies";
                 if (!error) {
                     next();
                 }
-            }, ArmorController.update),
+            }, ArmorController.eliminar),
             router.get('/all', ArmorController.armors),
             router.get('/price', ArmorController.getByPrice),
             router.get('/type', ArmorController.getByType),
-            router.get('/protection', ArmorController.getByProtection)
+            router.get('/protection', ArmorController.getByProtection),
+            router.get('/id', ArmorController.getById)
             
             
 

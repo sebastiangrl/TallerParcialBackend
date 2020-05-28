@@ -11,8 +11,18 @@ export  async function update(req: Request, res: Response){
     res.status(200).json(armor);
 }
 
+export  async function eliminar(req: Request, res: Response){
+    const armor: any = await ArmorService.eliminar(req.body.id);
+    res.status(200).json(armor);
+}
+
 export async function armors(req: Request, res: Response){
     const armor: any = await ArmorService.getAll();
+    res.status(200).json(armor);
+}
+
+export async function getById(req: Request, res: Response){
+    const armor: any = await ArmorService.getById(req.body.id);
     res.status(200).json(armor);
 }
 

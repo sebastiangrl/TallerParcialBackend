@@ -15,6 +15,16 @@ module ArmorService{
         return query;
     };
 
+    export function getById(id: number): Promise<any> {
+        const query = Model.select("armor",`WHERE id = ${id}`);
+        return query;
+    };
+
+    export function eliminar(id: number): Promise<any> {
+        const query = Model.delete("armor",id);
+        return query;
+    };
+
     //GETS
     export function getAll(): Promise<any> {
         const query = Model.select("armor","");

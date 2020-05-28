@@ -31,13 +31,8 @@ module WeaponService{
     //arreglar
     function getId(name: string): number{
         const query = `SELECT id from ${bd}.weapons WHERE name = '${name}'`;
-<<<<<<< HEAD
-        const result = Model.execQuery(query)[0]['id'];
-        return result;
-=======
         //const result =  Model.execQuery(query)[0]['id'];
         return 0;
->>>>>>> Sebas
     }
 
     function addAccToWea(id: number, accessorys: any){

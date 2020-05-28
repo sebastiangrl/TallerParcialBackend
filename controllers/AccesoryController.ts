@@ -1,20 +1,6 @@
 import { Request, Response} from "express";
 import AccessoryService from "../services/AccessoryService";
 
-<<<<<<< HEAD
-export async function getByType(req: Request, res: Response){
-    const accessory = await AccessoryService.getByType(req.body.type);
-    res.status(200).json(accessory);
-}
-
-export async function getByLevel(req: Request, res: Response){
-    const accessory = await AccessoryService.getByLevel(req.body.min, req.body.max);
-    res.status(200).json(accessory);
-}
-
-export async function getAll(req: Request, res: Response){
-    const accessory = await AccessoryService.getAll();
-=======
 
 export async function createAccessory(req: Request, res: Response){
     const accessory: any = await AccessoryService.create(req.body.name, req.body.price, req.body.damage, req.body.precision, req.body.scope, req.body.cadence, req.body.mobility, req.body.control, req.body.level, req.body.type);
@@ -29,16 +15,10 @@ export async function accessories(req: Request, res: Response){
 
 export async function getByType(req: Request, res: Response){
     const accessory: any = await AccessoryService.getByType(req.body.type);
->>>>>>> Sebas
     res.status(200).json(accessory);
 }
 
 export async function getByPrice(req: Request, res: Response){
-<<<<<<< HEAD
-    const accessory = await AccessoryService.getByPrice(req.body.min, req.body.max);
-    res.status(200).json(accessory);
-
-=======
     const accessory: any = await AccessoryService.getByPrice(req.body.min, req.body.max);
     res.status(200).json(accessory);
 }
@@ -46,5 +26,4 @@ export async function getByPrice(req: Request, res: Response){
 export async function getByLevel(req: Request, res: Response){
     const accessory: any = await AccessoryService.getByLevel(req.body.level);
     res.status(200).json(accessory);
->>>>>>> Sebas
 }

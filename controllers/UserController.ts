@@ -1,8 +1,6 @@
 import { Request, Response} from "express";
 import UserService from "../services/UserService";
 
-<<<<<<< HEAD
-=======
 
 
 export async function createUser(req: Request, res: Response){
@@ -11,20 +9,14 @@ export async function createUser(req: Request, res: Response){
 }
 
 
->>>>>>> Sebas
 export async function users(req: Request, res: Response){
     const user: any = await UserService.getAll();
     res.status(200).json(user);
 }
 
 //consume api amiga.
-<<<<<<< HEAD
-export async function UserRank(req: Request, res: Response){
-    const user: any = await UserService.UserRank(req.body.id);
-=======
 export async function getByRank(req: Request, res: Response){
     const user: any = await UserService.getByRank(req.body.id);
->>>>>>> Sebas
     res.status(200).json(user);
 }
 

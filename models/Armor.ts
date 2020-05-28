@@ -10,15 +10,9 @@ export default class Armor implements crud{
     weight: number;
     mobility: number;
     protection: number;
-<<<<<<< HEAD
-    type: string;
-
-    constructor( name: string, price: number, weight: number, mobility: number, protection: number, type: string ){
-=======
     type: number;
 
     constructor( name: string, price: number, weight: number, mobility: number, protection: number, type: number ){
->>>>>>> Sebas
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -80,11 +74,7 @@ export default class Armor implements crud{
         this.protection = protection;
     }
 
-<<<<<<< HEAD
-    setType( type: string ){
-=======
     setType( type: number ){
->>>>>>> Sebas
         this.type = type;
     }
 
@@ -93,22 +83,6 @@ export default class Armor implements crud{
         const result = Model.execQuery(query);
         return result;
     }
-<<<<<<< HEAD
-    create(): Promise<any> {
-        const query = `INSERT INTO ${bd}.armor (name, price, weight, mobility, protection, type) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, '${this.type}')`;
-        const result = Model.execQuery(query);
-        return result;
-    }
-    update(): Promise<any> {
-        const query = `UPDATE ${bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}') WHERE ${bd}.armor.id = ${this.id}`;
-        const result = Model.execQuery(query);
-        return result;
-    }
-    delete(): Promise<any> {
-        const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
-        const result = Model.execQuery(query);
-        return result;
-=======
 
     create(): Promise<any> {
         const query = `INSERT INTO ${bd}.armor (name, price, weight, mobility, protection, type_id) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, ${this.type})`;
@@ -128,7 +102,6 @@ export default class Armor implements crud{
         //const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
         //const result = Model.execQuery(query);
         return query;
->>>>>>> Sebas
     }
 
 

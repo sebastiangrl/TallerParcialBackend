@@ -1,23 +1,5 @@
 import express from "express";
 import * as ArmorController from "../controllers/ArmorController";
-<<<<<<< HEAD
-
-module ArmorsRouter {
-
-    export function getRoutes() {
-        let router: any = express.Router();
-        router.route('/')
-            .get(`/bar`, ArmorController.armors)
-            .post('/', )
-            .put('/', )
-            .delete('/', );
-        return router;
-    }
-
-}
-
-export default ArmorsRouter;
-=======
 import Policies from "../sso/Policies";
 
 
@@ -50,4 +32,3 @@ import Policies from "../sso/Policies";
             
 
 module.exports = router;
->>>>>>> Sebas

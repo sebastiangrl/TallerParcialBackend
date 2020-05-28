@@ -1,4 +1,5 @@
 import { crud } from "../interfaces/crud";
+import Model from "../libs/Model";
 
 export default class Accessory implements crud{
 
@@ -14,10 +15,10 @@ export default class Accessory implements crud{
     level: number;
     type: string;
     
-    constructor(name: string, damage: number, price: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string ){
+    constructor(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string ){
         this.name = name;
-        this.damage = damage;
         this.price = price;
+        this.damage = damage;
         this.precision = precision;
         this.scope = scope;
         this.cadence = cadence;
@@ -119,7 +120,8 @@ export default class Accessory implements crud{
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {
-        throw new Error("Method not implemented.");
+        const query = Model.create("accessorys",`(name, price, damage, precision, scope, cadence, mobility, control, level, type) VALUES ('${this.name}', ${this.price}, ${this.damage}, ${this.precision}, ${this.scope}, ${this.cadence}, ${this.mobility}, ${this.control}, ${this.level}, '${this.type}')`);
+        return query;
     }
     update(): Promise<any> {
         throw new Error("Method not implemented.");

@@ -1,15 +1,10 @@
 const mysql = require('mysql');
-<<<<<<< HEAD
-
-export default class Model {
-=======
 import { bd } from "../conf";
 
 export default class Model {
 
     private static instance: Model;
 
->>>>>>> Sebas
     static dbc: any = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -18,9 +13,6 @@ export default class Model {
 
     private constructor() {}
 
-<<<<<<< HEAD
-    static execQuery(query: string) {
-=======
     
     static getConnection(): Model {
         if (!Model.instance) {
@@ -30,7 +22,6 @@ export default class Model {
     }
 
      static execQuery(query: string) {
->>>>>>> Sebas
         let result = new Promise((resolve, reject) => {
             Model.dbc.query(query, (err: any, rows: any, fields: any) => {
                 if (err) { reject(err); }
@@ -41,11 +32,6 @@ export default class Model {
         return result;
     }
 
-<<<<<<< HEAD
-    getConnection(){
-
-    }
-=======
 
     public static select(table: string, where: string ) {
         Model.getConnection();
@@ -68,5 +54,4 @@ export default class Model {
         return result;
     }
 
->>>>>>> Sebas
 }

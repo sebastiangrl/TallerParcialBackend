@@ -10,7 +10,7 @@ module ArmorService{
         return query;
     };
 
-    export async function update(name: string, price: number): Promise<any> {
+    export async function update(name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
         const query = null
         return query;
     };

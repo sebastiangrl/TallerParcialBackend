@@ -8,7 +8,6 @@ export async function createUser(req: Request, res: Response){
     res.status(200).json(user);
 }
 
-
 export async function users(req: Request, res: Response){
     const user: any = await UserService.getAll();
     res.status(200).json(user);

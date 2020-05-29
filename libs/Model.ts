@@ -47,9 +47,16 @@ export default class Model {
         return result;
     }
 
+    public static update(table: string, values: string, attr: string) {
+        Model.getConnection();
+        const query = `UPDATE ${bd}.${table} ${values} WHERE ${bd}.${table}.id = ${attr}`;
+        const result = this.execQuery(query);
+        return result;
+    }
+
     public static delete(table: string, attr: string, values: string) {
         Model.getConnection();
-        const query = `DELETE FROM ${bd}.${table} WHERE ${bd}.${table}.${attr}. = ${values}`;
+        const query = `DELETE FROM ${bd}.${table} WHERE ${bd}.${table}.${attr} = ${values}`;
         const result = this.execQuery(query);
         return result;
     }

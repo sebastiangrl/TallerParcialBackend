@@ -10,6 +10,11 @@ module ArmorService{
         return query;
     };
 
+    export async function update(name: string, price: number, weight: number, mobility: number, protection: number, type: string): Promise<any> {
+        const query =null;// await Armor.update(name, price, weight, mobility, protection, type);
+        return query;
+    };
+
     export async function del(name: string, price: number): Promise<any> {
         const query = null
         return query;

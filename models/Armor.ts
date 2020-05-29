@@ -89,10 +89,9 @@ export default class Armor implements crud{
         return query;
     }
 
-    update(): Promise<any> {
-        const query = `UPDATE ${bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}') WHERE ${bd}.armor.id = ${this.id}`;
-        const result = Model.execQuery(query);
-        return result;
+    public update(): Promise<any> {
+        const query = Model.update("armor",`SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}')`, `${this.id}`);
+        return query;
     }
 
     delete(): Promise<any> {

@@ -26,11 +26,20 @@ module WeaponService{
         return obj;
     };
 
-    export function customCreate(accessory: any) {
-        const query = `INSERT INTO ${bd}.weapons (name, damage, model_nombre) VALUES ('${accessory.name}', ${accessory.damage}, ${accessory.model})`;
-        Model.execQuery(query);
-        //const id = getId(accessory.name);
-        //addAccToWea(id, accessory.accessorys);
+    export async function customCreate(price: number, name: string, model: number, damage: number, accessory: Array<any>) {
+        const query = `INSERT INTO ${bd}.weapons (price, name, damage, model_id) VALUES (${price}, '${name}', ${damage}, ${model})`;
+        let queryAcc:string = "";
+        for (let i = 0; i < accessory.length; i++) {
+            if(await limitAcc(accessory[i])){
+                return {"error": true, "ms":`El accesorio con id ${accessory[i]} no existe`, "code":404};
+            }
+        }
+        const result:any = await Model.execQuery(query);
+        for(let c = 0; c < accessory.length; c++){
+            queryAcc = `INSERT INTO ${bd}.assembler (weapons_id, accessorys_id) VALUES (${result.insertId}, ${accessory[c]})`;
+            await Model.execQuery(queryAcc);
+        }
+        return { "code": 200, "result": result };
     };
 
     export function getByPrice(min: number, max: number): Promise<any> {
@@ -64,6 +73,16 @@ module WeaponService{
             objArr.push(weapon);
         }
         return objArr;
+    }
+
+    async function limitAcc(ida: number){
+        const query = `SELECT id from ${bd}.accessorys where id = ${ida}`;
+        let max: any = await Model.execQuery(query);
+        try{
+        return (max[0].id == ida)? false: true;
+        }catch(error){
+            return true;
+        }
     }
 
 

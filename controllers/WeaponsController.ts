@@ -15,8 +15,8 @@ export async function getByKills(req: Request, res: Response){
 };
 
 export async function customCreate(req: Request, res: Response){
-    const weapon: any = await WeaponsService.customCreate(req.body.weapon);
-    res.status(200).json(weapon);
+    const weapon: any = await WeaponsService.customCreate(req.body.price, req.body.name, req.body.model, req.body.damage, req.body.accessory);
+    res.status(weapon.code).json(weapon);
 };
 
 export async function create(req: Request, res: Response){

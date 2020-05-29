@@ -91,17 +91,11 @@ export default class Armor implements crud{
     }
 
     update(): Promise<any> {
-        const query = `UPDATE ${bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type_id = '${this.type}') WHERE ${bd}.armor.id = ${this.id}`;
-        const result = Model.execQuery(query);
-        return result;
+        throw new Error("Method not implemented.");
     }
 
     delete(): Promise<any> {
-        //(table: string, attr: string, values: string)
-        const query = Model.delete("armor",1);
-        //const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
-        //const result = Model.execQuery(query);
-        return query;
+        throw new Error("Method not implemented.");
     }
 
 

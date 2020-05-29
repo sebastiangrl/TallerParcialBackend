@@ -1,5 +1,6 @@
 import { crud } from "../interfaces/crud";
 import Model from "../libs/Model";
+import { bd } from "../conf"
 
 export default class Accessory implements crud{
 
@@ -120,8 +121,8 @@ export default class Accessory implements crud{
         throw new Error("Method not implemented.");
     }
     create(): Promise<any> {
-        const query = Model.create("accessorys",`(name, price, damage, precision, scope, cadence, mobility, control, level, type) VALUES ('${this.name}', ${this.price}, ${this.damage}, ${this.precision}, ${this.scope}, ${this.cadence}, ${this.mobility}, ${this.control}, ${this.level}, '${this.type}')`);
-        return query;
+        const query = `INSERT INTO ${bd}.accessorys (name, price, damage, prec, scope, cadence, mobility, control, level, type_id) VALUES ('${this.name}', ${this.price}, ${this.damage}, ${this.precision}, ${this.scope}, ${this.cadence}, ${this.mobility}, ${this.control}, ${this.level}, ${this.type})`;
+        return Model.execQuery(query);
     }
     update(): Promise<any> {
         throw new Error("Method not implemented.");

@@ -10,12 +10,12 @@ module ArmorService{
         return query;
     };
 
-    export async function update(name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
-        const query = null
+    export async function update(id: number, name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
+        const query = Model.update("armor",`SET name = '${name}', price = ${price}, weight = ${weight}, mobility = ${mobility}, protection = ${protection}, type_id = ${type}`,id);
         return query;
     };
 
-    export function getById(id: number): Promise<any> {
+    export async function getById(id: number): Promise<any> {
         const query = Model.select("armor",`WHERE id = ${id}`);
         return query;
     };

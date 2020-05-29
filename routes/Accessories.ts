@@ -4,6 +4,8 @@ import * as AccessoryController from "../controllers/AccesoryController";
         const router = express.Router();
         router.route('/')
             router.post('/create', AccessoryController.createAccessory),
+            router.put('/update', AccessoryController.update),
+            router.delete('/delete', AccessoryController.eliminar),
             router.get('/all', AccessoryController.accessories)
             router.get('/type', AccessoryController.getByType),
             router.get('/price', AccessoryController.getByPrice),

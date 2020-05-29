@@ -10,9 +10,9 @@ export default class Armor implements crud{
     weight: number;
     mobility: number;
     protection: number;
-    type: string;
+    type: number;
 
-    constructor( name: string, price: number, weight: number, mobility: number, protection: number, type: string ){
+    constructor( name: string, price: number, weight: number, mobility: number, protection: number, type: number ){
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -74,7 +74,7 @@ export default class Armor implements crud{
         this.protection = protection;
     }
 
-    setType( type: string ){
+    setType( type: number ){
         this.type = type;
     }
 
@@ -85,18 +85,20 @@ export default class Armor implements crud{
     }
 
     create(): Promise<any> {
-        const query = Model.create("armor",`(name, price, weight, mobility, protection, type) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, '${this.type}')`);
-        return query;
+        const query = `INSERT INTO ${bd}.armor (name, price, weight, mobility, protection, type_id) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, ${this.type})`;
+        const result = Model.execQuery(query);
+        return result;
     }
 
-    public update(): Promise<any> {
-        const query = Model.update("armor",`SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}')`, `${this.id}`);
-        return query;
+    update(): Promise<any> {
+        const query = `UPDATE ${bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type_id = '${this.type}') WHERE ${bd}.armor.id = ${this.id}`;
+        const result = Model.execQuery(query);
+        return result;
     }
 
     delete(): Promise<any> {
         //(table: string, attr: string, values: string)
-        const query = Model.delete("armor","id",`${this.id}`);
+        const query = Model.delete("armor",1);
         //const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
         //const result = Model.execQuery(query);
         return query;

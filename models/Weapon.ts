@@ -4,20 +4,25 @@ import Accessory from "./Accessory";
 export default class Weapon implements crud{
 
     id: number | null = null;
+    price: number;
     name: string;
-    model: string;
-    accessory: Array<Accessory>;
+    model: number;
+    accessory: Array<Accessory> =  [];
     damage: number;
 
-    constructor(name: string, model: string, accessory: Array<Accessory>, damage: number){
+    constructor(price: number, name: string, model: number, damage: number){
+        this.price = price;
         this.name = name;
         this.model = model;
-        this.accessory = accessory;
         this.damage = damage;
     }
 
     getId(){
         return this.id;
+    }
+
+    getprice(){
+        return this.price;
     }
 
     getName(){
@@ -40,11 +45,15 @@ export default class Weapon implements crud{
         this.id = id;
     }
 
+    setPrice( price: number ){
+        this.price = price;
+    }
+
     setName( name: string ){
         this.name = name;
     }
 
-    setModel( model: string ){
+    setModel( model: number ){
         this.model = model;
     }
 

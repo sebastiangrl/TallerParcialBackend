@@ -4,19 +4,24 @@ import Model from "../libs/Model";
 module ArmorService{
 
     //CRUD
-    export async function create(name: string, price: number, weight: number, mobility: number, protection: number, type: string): Promise<any> {
+    export async function create(name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
         const armor = new Armor(name, price, weight, mobility, protection, type);
         const query = await armor.create();
         return query;
     };
 
-    export async function update(name: string, price: number, weight: number, mobility: number, protection: number, type: string): Promise<any> {
-        const query =null;// await Armor.update(name, price, weight, mobility, protection, type);
+    export async function update(name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
+        const query = null
         return query;
     };
 
-    export async function del(name: string, price: number): Promise<any> {
-        const query = null
+    export function getById(id: number): Promise<any> {
+        const query = Model.select("armor",`WHERE id = ${id}`);
+        return query;
+    };
+
+    export function eliminar(id: number): Promise<any> {
+        const query = Model.delete("armor",id);
         return query;
     };
 
@@ -27,7 +32,7 @@ module ArmorService{
     };
 
     export function getByType(type: string): Promise<any> {
-        const query = Model.select("armor",`WHERE type LIKE '%${type}%'`);
+        const query = Model.select("armor",`WHERE type_id = ${type}`);
         return query;
     };
 

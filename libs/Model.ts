@@ -47,9 +47,9 @@ export default class Model {
         return result;
     }
 
-    public static update(table: string, values: string, attr: string) {
+    public static update(table: string, values: string, id: number) {
         Model.getConnection();
-        const query = `UPDATE ${bd}.${table} ${values} WHERE ${bd}.${table}.id = ${attr}`;
+        const query = `UPDATE ${bd}.${table} ${values} WHERE id = ${id}`;
         const result = this.execQuery(query);
         return result;
     }

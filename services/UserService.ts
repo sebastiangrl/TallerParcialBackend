@@ -1,6 +1,5 @@
 import User from "../models/User";
 import Model from "../libs/Model";
-import { bd } from "../conf";
 
 module UserService{
 
@@ -8,6 +7,16 @@ module UserService{
     export async function create(username: string, clan: string, password: string): Promise<any> {
         const user = new User(username, clan, password);
         const query = await user.create();
+        return query;
+    };
+ 
+    export function eliminar(id: number): Promise<any> {
+        const query = Model.delete("users",id);
+        return query;
+    };
+
+    export function update(id: number, username: string, clan: string, password: string): Promise<any> {
+        const query = Model.update("users",`SET username = '${username}', clan = '${clan}', password = '${password}' `,id);
         return query;
     };
 

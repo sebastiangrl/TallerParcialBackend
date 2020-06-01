@@ -4,7 +4,7 @@ import Model from "../libs/Model";
 module AccessoryService {
 
     //CRUD
-    export async function create(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string): Promise<any> {
+    export async function create(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: number): Promise<any> {
         const accessory = new Accessory(name, price, damage, precision, scope, cadence, mobility, control, level, type);
         const query = await accessory.create();
         return query;

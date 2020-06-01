@@ -13,9 +13,9 @@ export default class Accessory implements crud{
     mobility: number;
     control: number;
     level: number;
-    type: string;
+    type: number;
     
-    constructor(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: string ){
+    constructor(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: number ){
         this.name = name;
         this.price = price;
         this.damage = damage;
@@ -112,7 +112,7 @@ export default class Accessory implements crud{
         this.level = level;
     }
 
-    setType( type: string){
+    setType( type: number){
         this.type = type;
     }
 

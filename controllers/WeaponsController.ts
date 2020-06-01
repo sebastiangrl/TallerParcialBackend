@@ -1,10 +1,10 @@
 import { Request, Response} from "express";
 import WeaponsService from "../services/WeaponsService";
+import WeaponFactory from "../factory/WeaponFactory";
 
 export async function getByModel(req: Request, res: Response){
     const weapon: any = await WeaponsService.getByModel(req.body.model);
-    const arrWeapon = await  WeaponsService.addAccToWea(weapon);
-    res.status(200).json(arrWeapon);
+    res.status(200).json(weapon);
     
 };
 
@@ -21,13 +21,12 @@ export async function customCreate(req: Request, res: Response){
 
 export async function create(req: Request, res: Response){
     const weapon: any = await WeaponsService.create(req.body.price, req.body.name, req.body.model, req.body.damage);
-    res.status(200).json(weapon);
+    res.status(weapon.code).json(weapon);
 };
 
 export async function getByPrice(req: Request, res: Response){
     const weapon: any = await WeaponsService.getByPrice(req.body.min, req.body.max);
-    const arrWeapon = await  WeaponsService.addAccToWea(weapon);
-    res.status(200).json(arrWeapon);
+    res.status(200).json(weapon);
 };
 
 export async function modelList(req: Request, res: Response){

@@ -1,7 +1,8 @@
 import { crud } from "../interfaces/crud";
 import Accessory from "./Accessory";
+import { WeaponInterface } from "../interfaces/WeaponsInterface";
 
-export default class Weapon implements crud{
+export default class Weapon implements crud, WeaponInterface{
 
     id: number | null = null;
     price: number;

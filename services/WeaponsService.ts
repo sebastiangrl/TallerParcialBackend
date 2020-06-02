@@ -9,7 +9,7 @@ module WeaponService{
             return {"error": true, "ms":`El modelo con id ${model} no existe`, "code":404};
         }
             const query = `SELECT * from ${bd}.weapons WHERE model_id = ${model}`;
-            let result = await Model.execQuery(query);
+            let result:any = await Model.execQuery(query);
             result = WeaponFactory.addAccToWea(result);
             return result;
     };

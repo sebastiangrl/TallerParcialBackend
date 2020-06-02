@@ -13,6 +13,16 @@ export async function accessories(req: Request, res: Response){
     res.status(200).json(accessory);
 }
 
+export async function getById(req: Request, res: Response){
+    const accessory: any = await AccessoryService.getById(req.body.id);
+    res.status(200).json(accessory);
+}
+
+export async function eliminar(req: Request, res: Response){
+    const accessory: any = await AccessoryService.eliminar(req.body.id);
+    res.status(200).json(accessory);
+}
+
 export async function getByType(req: Request, res: Response){
     const accessory: any = await AccessoryService.getByType(req.body.type);
     res.status(200).json(accessory);

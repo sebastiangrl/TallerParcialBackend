@@ -1,7 +1,8 @@
 import { crud } from "../interfaces/crud";
 import Model from "../libs/Model";
+import { UserInterface } from "../interfaces/UserInterface";
 
-export default class User implements crud{
+export default class User implements crud, UserInterface{
 
     id: number  | null = null;
     username: string;

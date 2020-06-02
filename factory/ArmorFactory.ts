@@ -13,4 +13,12 @@ export default class ArmorFactory{
         dato.setId(info.insertId);
         return dato;
     }
+
+    static createObject(obj: any){
+        var objArr:Array<Armor> = [];
+        for( let i = 0; i < obj.length ; i ++ ){
+            objArr.push(ArmorFactory.Create(obj[i]));
+        }
+        return objArr;
+    }
 }

@@ -1,7 +1,8 @@
 import { crud } from "../interfaces/crud";
 import Model from "../libs/Model";
+import { AccessoryInterface } from "../interfaces/AccessoryInterface";
 
-export default class Accessory implements crud{
+export default class Accessory implements crud, AccessoryInterface{
 
     id: number | null = null;
     name: string;

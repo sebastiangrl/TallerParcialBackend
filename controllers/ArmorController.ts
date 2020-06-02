@@ -7,7 +7,7 @@ export async function createArmors(req: Request, res: Response){
 }
 
 export  async function update(req: Request, res: Response){
-    const armor: any = await ArmorService.update(req.body.name, req.body.price, req.body.weight, req.body.mobility, req.body.protection, req.body.type_id);
+    const armor: any = await ArmorService.update(req.body.id, req.body.name, req.body.price, req.body.weight, req.body.mobility, req.body.protection, req.body.type_id);
     res.status(200).json(armor);
 }
 

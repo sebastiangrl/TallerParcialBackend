@@ -1,8 +1,9 @@
 import { crud } from "../interfaces/crud";
 import Model from "../libs/Model";
 import { bd } from "../conf"
+import { ArmorInterface } from "../interfaces/ArmorInterface";
 
-export default class Armor implements crud{
+export default class Armor implements crud, ArmorInterface{
     
     id: number | null = null;
     name: string;
@@ -51,7 +52,7 @@ export default class Armor implements crud{
     }
 
     setId( id: number ){
-        return this.id;
+        return this.id = id;
     }
 
     setName( name: string ){

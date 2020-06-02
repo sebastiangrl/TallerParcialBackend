@@ -8,7 +8,6 @@ import Policies from "../sso/Policies";
             router.get('/all', (req, res, next) => {
                 let error = false;
                 const host: string | undefined = req.headers.host;
-                console.log(host);
                 if (!Policies.verifyHost(host, 'localhost:3000')) {
                     error = true;
                     res.status(401).json({ error: true, msg: 'Not an Authorized host' });
@@ -25,6 +24,36 @@ import Policies from "../sso/Policies";
                     next();
                 }
             }, UserController.users),
+            router.delete('/delete', (req, res, next) => {
+                let error = false;
+                if (!error) {
+                    const apiKey = req.header("API-KEY");
+                    const apiKeyVerification = Policies.verifyApiKey(apiKey);
+                    if (apiKeyVerification.error) {
+                        error = true;
+                        res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+                    }
+                }
+                if (!error) {
+                    next();
+                }
+            }, UserController.eliminar),
+            router.route('/'),
+            router.post('/create', UserController.createUser),
+            router.put('/update', (req, res, next) => {
+                let error = false;
+                if (!error) {
+                    const apiKey = req.header("API-KEY");
+                    const apiKeyVerification = Policies.verifyApiKey(apiKey);
+                    if (apiKeyVerification.error) {
+                        error = true;
+                        res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+                    }
+                }
+                if (!error) {
+                    next();
+                }
+            }, UserController.update),
             router.get('/id', UserController.getById),
             router.get('/clan', UserController.getByClan),
             router.get('/rank', UserController.getByRank)

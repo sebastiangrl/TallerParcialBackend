@@ -8,6 +8,16 @@ export async function createUser(req: Request, res: Response){
     res.status(200).json(user);
 }
 
+export  async function update(req: Request, res: Response){
+    const accessory: any = await UserService.update(req.body.id, req.body.username, req.body.clan, req.body.password);
+    res.status(200).json(accessory);
+}
+
+export  async function eliminar(req: Request, res: Response){
+    const armor: any = await UserService.eliminar(req.body.id);
+    res.status(200).json(armor);
+}
+
 
 export async function users(req: Request, res: Response){
     const user: any = await UserService.getAll();

@@ -7,10 +7,22 @@ module AccessoryService {
 
     //CRUD
     export async function create(name: string, price: number, damage: number, precision: number, scope: number, cadence: number, mobility: number, control: number, level: number, type: number): Promise<any> {
+        if(validType(type)){
+            return {"error": true, "ms":`El tipo con id ${type} no esta disponible parae ste objeto`, "code":400};
+        }
         const query = `INSERT INTO ${bd}.accessorys (name, price, damage, prec, scope, cadence, mobility, control, level, type_id) VALUES ('${name}', ${price}, ${damage}, ${precision}, ${scope}, ${cadence}, ${mobility}, ${control}, ${level}, ${type})`;
         let result:any = await Model.execQuery(query);
         const accessory = AccessoryFactory.CreateNew(result, name, price, damage, precision, scope, cadence, mobility, control, level, type);
         return { "error": false, "ms":`El accesorio ${name} fue creada con exito`, "code":201 };
+    };
+
+    export async function update(id: number, name: string,price: number,damage: number,precision: number,scope: number,cadence: number,mobility: number,control: number,level: number,type: number): Promise<any> {
+        if(validType(type)){
+            return {"error": true, "ms":`El tipo con id ${type} no esta disponible parae ste objeto`, "code":400};
+        }
+        const query = `UPDATE ${bd}.accessorys SET name = '${name}', price = ${price}, damage = ${damage}, prec = ${precision}, scope = ${scope}, cadence = ${cadence}, mobility = ${mobility}, control = ${control}, level = ${level}, type_id = ${type} WHERE id = ${id}`;
+        await Model.execQuery(query);
+        return { "error": false, "ms":`El accesorio con id ${id} fue actualizada con exito`, "code":200 };
     };
 
     export async function getById(id: number): Promise<any> {
@@ -64,6 +76,10 @@ module AccessoryService {
         }catch(error){
             return true;
         }
+    }
+
+    function validType(type: number){
+        return (type > 5 && type < 10)?false : true;
     }
 
 }

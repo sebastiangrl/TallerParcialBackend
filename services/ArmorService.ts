@@ -14,7 +14,7 @@ module ArmorService{
     };
 
     export async function update(id: number, name: string, price: number, weight: number, mobility: number, protection: number, type: number): Promise<any> {
-        const query = `UPDATE ${bd}.armor SET (name = '${name}', price = ${price}, weight = ${weight}, mobility = ${mobility}, protection = ${protection}, type_id = ${type}) WHERE id = ${id}`;
+        const query = `UPDATE ${bd}.armor SET name = '${name}', price = ${price}, weight = ${weight}, mobility = ${mobility}, protection = ${protection}, type_id = ${type} WHERE id = ${id}`;
         await Model.execQuery(query);
         return { "error": false, "ms":`La armadura con id ${id} fue actualizada con exito`, "code":200 };
     };
@@ -25,9 +25,9 @@ module ArmorService{
         return result;
     };
 
-    export function eliminar(id: number): Promise<any> {
-        const query = Model.delete("armor",id);
-        return query;
+    export async function eliminar(id: number): Promise<any> {
+        await Model.delete("armor",id);
+        return { "error": false, "ms":`La armadura con id ${id} fue eliminado con exito`, "code":200 };
     };
 
     //GETS

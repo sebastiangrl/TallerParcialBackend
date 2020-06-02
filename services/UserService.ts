@@ -16,6 +16,17 @@ module UserService{
         return { "error": false, "ms":`El usuario ${username} fue creada con exito`, "code":201 };
     };
 
+    export async function update(id: number, username: string,clan: number,password: number): Promise<any> {
+        const query = `UPDATE ${bd}.users SET username = '${username}', clan = '${clan}', password = '${password}' WHERE id = ${id}`;
+        await Model.execQuery(query);
+        return { "error": false, "ms":`El usuario con id ${id} fue actualizada con exito`, "code":200 };
+    };
+
+    export async function eliminar(id: number): Promise<any> {
+        await Model.delete("users",id);
+        return { "error": false, "ms":`El usuario con id ${id} fue eliminado con exito`, "code":200 };
+    };
+
     //GETS
     export async function getAll(): Promise<any> {
         const query = await Model.select("users","");

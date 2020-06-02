@@ -32,6 +32,21 @@ import Policies from "../sso/Policies";
                     next();
                 }
             }, AccessoryController.eliminar),
+            router.route('/')
+            router.put('/update', (req, res, next) => {
+                let error = false;
+                if (!error) {
+                    const apiKey = req.header("API-KEY");
+                    const apiKeyVerification = Policies.verifyApiKey(apiKey);
+                    if (apiKeyVerification.error) {
+                        error = true;
+                        res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+                    }
+                }
+                if (!error) {
+                    next();
+                }
+            }, AccessoryController.update),
             router.get('/all', AccessoryController.accessories)
             router.get('/type', AccessoryController.getByType),
             router.get('/price', AccessoryController.getByPrice),

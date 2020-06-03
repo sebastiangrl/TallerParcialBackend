@@ -37,7 +37,7 @@ class Armor {
         return this.type;
     }
     setId(id) {
-        return this.id;
+        return this.id = id;
     }
     setName(name) {
         this.name = name;
@@ -63,19 +63,18 @@ class Armor {
         return result;
     }
     create() {
-        const query = Model_1.default.create("armor", `(name, price, weight, mobility, protection, type) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, '${this.type}')`);
-        return query;
-    }
-    update() {
-        const query = `UPDATE ${conf_1.bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type = '${this.type}') WHERE ${conf_1.bd}.armor.id = ${this.id}`;
+        const query = `INSERT INTO ${conf_1.bd}.armor (name, price, weight, mobility, protection, type_id) VALUES ('${this.name}', ${this.price}, ${this.weight}, ${this.mobility}, ${this.protection}, ${this.type})`;
         const result = Model_1.default.execQuery(query);
         return result;
     }
+    update() {
+        const query = `UPDATE ${conf_1.bd}.armor SET (name = '${this.name}', price = ${this.price}, weight = ${this.weight}, mobility = ${this.mobility}, protection = ${this.protection}, type_id = '${this.type}') WHERE ${conf_1.bd}.armor.id = ${this.id}`;
+        const result = Model_1.default.execQuery(query);
+        return result;
+    }
+    //reparar
     delete() {
-        //(table: string, attr: string, values: string)
-        const query = Model_1.default.delete("armor", "id", `${this.id}`);
-        //const query = `DELETE FROM ${bd}.armor WHERE ${bd}.armor.id = ${this.id}`;
-        //const result = Model.execQuery(query);
+        const query = Model_1.default.delete("armor", 1);
         return query;
     }
 }

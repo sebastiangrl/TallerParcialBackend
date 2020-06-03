@@ -24,9 +24,52 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const AccessoryController = __importStar(require("../controllers/AccesoryController"));
+const Policies_1 = __importDefault(require("../sso/Policies"));
 const router = express_1.default.Router();
 router.route('/');
-router.post('/create', AccessoryController.createAccessory),
+router.post('/create', (req, res, next) => {
+    let error = false;
+    if (!error) {
+        const apiKey = req.header("API-KEY");
+        const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+        if (apiKeyVerification.error) {
+            error = true;
+            res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+        }
+    }
+    if (!error) {
+        next();
+    }
+}, AccessoryController.createAccessory),
+    router.delete('/delete', (req, res, next) => {
+        let error = false;
+        if (!error) {
+            const apiKey = req.header("API-KEY");
+            const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+            if (apiKeyVerification.error) {
+                error = true;
+                res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+            }
+        }
+        if (!error) {
+            next();
+        }
+    }, AccessoryController.eliminar),
+    router.route('/');
+router.put('/update', (req, res, next) => {
+    let error = false;
+    if (!error) {
+        const apiKey = req.header("API-KEY");
+        const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+        if (apiKeyVerification.error) {
+            error = true;
+            res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+        }
+    }
+    if (!error) {
+        next();
+    }
+}, AccessoryController.update),
     router.get('/all', AccessoryController.accessories);
 router.get('/type', AccessoryController.getByType),
     router.get('/price', AccessoryController.getByPrice),

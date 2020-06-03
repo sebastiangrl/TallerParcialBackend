@@ -1,6 +1,7 @@
 import { Request, Response} from "express";
 import WeaponsService from "../services/WeaponsService";
 import WeaponFactory from "../factory/WeaponFactory";
+import ArmyService from "../services/ArmyService";
 
 export async function getByModel(req: Request, res: Response){
     const weapon: any = await WeaponsService.getByModel(req.body.model);
@@ -10,7 +11,7 @@ export async function getByModel(req: Request, res: Response){
 
 // requiere api amiga.
 export async function getByKills(req: Request, res: Response){
-    const weapon: any = await WeaponsService.getByKills();
+    const weapon: any = await ArmyService.getByKills();
     res.status(200).json(weapon);
 };
 
@@ -31,6 +32,11 @@ export async function getByPrice(req: Request, res: Response){
 
 export async function modelList(req: Request, res: Response){
     const model: any = await WeaponsService.modelList();
+    res.status(200).json(model);
+};
+
+export async function getAll(req: Request, res: Response){
+    const model: any = await WeaponsService.getAll();
     res.status(200).json(model);
 };
 

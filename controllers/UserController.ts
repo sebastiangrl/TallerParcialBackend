@@ -1,5 +1,6 @@
 import { Request, Response} from "express";
 import UserService from "../services/UserService";
+import ArmyService from "../services/ArmyService";
 
 
 
@@ -26,7 +27,7 @@ export async function users(req: Request, res: Response){
 
 //consume api amiga.
 export async function getByRank(req: Request, res: Response){
-    const user: any = await UserService.getByRank(req.body.id);
+    const user: any = await ArmyService.getByRank(req.body.rank);
     res.status(200).json(user);
 }
 

@@ -1,15 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Weapon {
-    constructor(name, model, accessory, damage) {
+    constructor(price, name, model, damage) {
         this.id = null;
+        this.accessory = [];
+        this.price = price;
         this.name = name;
         this.model = model;
-        this.accessory = accessory;
         this.damage = damage;
     }
     getId() {
         return this.id;
+    }
+    getprice() {
+        return this.price;
     }
     getName() {
         return this.name;
@@ -25,6 +29,9 @@ class Weapon {
     }
     setId(id) {
         this.id = id;
+    }
+    setPrice(price) {
+        this.price = price;
     }
     setName(name) {
         this.name = name;

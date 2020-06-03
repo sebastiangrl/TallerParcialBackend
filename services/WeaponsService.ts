@@ -14,13 +14,6 @@ module WeaponService{
             return result;
     };
 
-    //requiere api externa
-    export function getByKills(): Promise<any> {
-        const query = `SELECT * from ${bd}.weapons`;
-        const result = Model.execQuery(query);
-        return result;
-    };
-
     export async function create(price: number, name: string, model: number, damage: number) {
         const query = `INSERT INTO ${bd}.weapons (price, name, damage, model_id) VALUES (${price}, '${name}', ${damage}, ${model})`;
         if(await validModel(model)){
@@ -52,6 +45,13 @@ module WeaponService{
 
     export async function getByPrice(min: number, max: number): Promise<any> {
         const query = `SELECT * from ${bd}.weapons WHERE price BETWEEN ${min} and ${max}`;
+        let result = await Model.execQuery(query);
+        result = WeaponFactory.addAccToWea(result);
+        return result;
+    };
+
+    export async function getAll(): Promise<any> {
+        const query = `SELECT * from ${bd}.weapons`;
         let result = await Model.execQuery(query);
         result = WeaponFactory.addAccToWea(result);
         return result;

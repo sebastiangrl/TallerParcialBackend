@@ -7,8 +7,8 @@ export default class Model {
 
     static dbc: any = mysql.createConnection({
         host: 'localhost',
-        user: 'avantece_apiarmeria',
-        password: 'apiarmeria1234'
+        user: 'root',
+        password: ''
     }); 
 
     private constructor() {}

@@ -1,14 +1,17 @@
 import express from "express";
 import bodyParser from "body-parser";
-import {port} from "./conf"
+import {port} from "./conf";
+
+var cors = require('cors')
 var weaponsRouter = require("./routes/Weapons");
 var ArmorsRouter = require("./routes/Armors");
 var UsersRouter = require("./routes/Users");
 var AccessoriesRouter = require("./routes/Accessories");
 
+
 const app = express();
 
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 

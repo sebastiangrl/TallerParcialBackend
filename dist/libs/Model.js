@@ -34,17 +34,17 @@ let Model = /** @class */ (() => {
             const result = this.execQuery(query);
             return result;
         }
-        static delete(table, attr, values) {
+        static delete(table, id) {
             Model.getConnection();
-            const query = `DELETE FROM ${conf_1.bd}.${table} WHERE ${conf_1.bd}.${table}.${attr}. = ${values}`;
+            const query = `DELETE FROM ${conf_1.bd}.${table} WHERE id = ${id}`;
             const result = this.execQuery(query);
             return result;
         }
     }
     Model.dbc = mysql.createConnection({
         host: 'localhost',
-        user: 'avantece_apiarmeria',
-        password: 'apiarmeria1234'
+        user: 'root',
+        password: ''
     });
     return Model;
 })();

@@ -12,50 +12,82 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Armor_1 = __importDefault(require("../models/Armor"));
 const Model_1 = __importDefault(require("../libs/Model"));
+const conf_1 = require("../conf");
+const ArmorFactory_1 = __importDefault(require("../factory/ArmorFactory"));
 var ArmorService;
 (function (ArmorService) {
     //CRUD
     function create(name, price, weight, mobility, protection, type) {
         return __awaiter(this, void 0, void 0, function* () {
-            const armor = new Armor_1.default(name, price, weight, mobility, protection, type);
-            const query = yield armor.create();
-            return query;
+            const query = `INSERT INTO ${conf_1.bd}.armor (name, price, weight, mobility, protection, type_id) VALUES ('${name}', ${price}, ${weight}, ${mobility}, ${protection}, ${type})`;
+            let result = yield Model_1.default.execQuery(query);
+            const armor = ArmorFactory_1.default.CreateNew(result, name, price, weight, mobility, protection, type);
+            return { "error": false, "ms": `La armadura ${name} fue creada con exito`, "code": 201 };
         });
     }
     ArmorService.create = create;
     ;
-    function del(name, price) {
+    function update(id, name, price, weight, mobility, protection, type) {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = null;
-            return query;
+            const query = `UPDATE ${conf_1.bd}.armor SET name = '${name}', price = ${price}, weight = ${weight}, mobility = ${mobility}, protection = ${protection}, type_id = ${type} WHERE id = ${id}`;
+            yield Model_1.default.execQuery(query);
+            return { "error": false, "ms": `La armadura con id ${id} fue actualizada con exito`, "code": 200 };
         });
     }
-    ArmorService.del = del;
+    ArmorService.update = update;
+    ;
+    function getById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = yield Model_1.default.select("armor", `WHERE id = ${id}`);
+            const result = ArmorFactory_1.default.createObject(query);
+            return result;
+        });
+    }
+    ArmorService.getById = getById;
+    ;
+    function eliminar(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield Model_1.default.delete("armor", id);
+            return { "error": false, "ms": `La armadura con id ${id} fue eliminado con exito`, "code": 200 };
+        });
+    }
+    ArmorService.eliminar = eliminar;
     ;
     //GETS
     function getAll() {
-        const query = Model_1.default.select("armor", "");
-        return query;
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = yield Model_1.default.select("armor", "");
+            const result = ArmorFactory_1.default.createObject(query);
+            return result;
+        });
     }
     ArmorService.getAll = getAll;
     ;
     function getByType(type) {
-        const query = Model_1.default.select("armor", `WHERE type LIKE '%${type}%'`);
-        return query;
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = yield Model_1.default.select("armor", `WHERE type_id = ${type}`);
+            const result = ArmorFactory_1.default.createObject(query);
+            return result;
+        });
     }
     ArmorService.getByType = getByType;
     ;
     function getByProtection(min, max) {
-        const query = Model_1.default.select("armor", `WHERE protection BETWEEN ${min} and ${max}`);
-        return query;
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = yield Model_1.default.select("armor", `WHERE protection BETWEEN ${min} and ${max}`);
+            const result = ArmorFactory_1.default.createObject(query);
+            return result;
+        });
     }
     ArmorService.getByProtection = getByProtection;
     ;
     function getByPrice(min, max) {
-        const query = Model_1.default.select("armor", `WHERE price BETWEEN ${min} and ${max}`);
-        return query;
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = yield Model_1.default.select("armor", `WHERE price BETWEEN ${min} and ${max}`);
+            const result = ArmorFactory_1.default.createObject(query);
+            return result;
+        });
     }
     ArmorService.getByPrice = getByPrice;
     ;

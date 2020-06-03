@@ -47,9 +47,10 @@ import Policies from "../sso/Policies";
                 }
             }, WeaponsController.customCreate),
             router.get('/model', WeaponsController.getByModel),
+            router.get('/kills', WeaponsController.getByKills);
             router.get('/price', WeaponsController.getByPrice),
             router.get('/modellist', WeaponsController.modelList),
-            router.get('/rank',)
+            router.get('/all', WeaponsController.getAll)
 
 
 module.exports = router;

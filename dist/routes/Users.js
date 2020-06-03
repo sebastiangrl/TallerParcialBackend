@@ -24,11 +24,60 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const UserController = __importStar(require("../controllers/UserController"));
+const Policies_1 = __importDefault(require("../sso/Policies"));
 const router = express_1.default.Router();
-router.route('/');
-router.post('/create', UserController.createUser),
-    router.get('/all', UserController.users);
-router.get('/id', UserController.getById),
+router.route('/'),
+    router.post('/create', UserController.createUser),
+    router.get('/all', (req, res, next) => {
+        let error = false;
+        const host = req.headers.host;
+        if (!Policies_1.default.verifyHost(host, 'localhost:3000')) {
+            error = true;
+            res.status(401).json({ error: true, msg: 'Not an Authorized host' });
+        }
+        if (!error) {
+            const apiKey = req.header("API-KEY");
+            const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+            if (apiKeyVerification.error) {
+                error = true;
+                res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+            }
+        }
+        if (!error) {
+            next();
+        }
+    }, UserController.users),
+    router.delete('/delete', (req, res, next) => {
+        let error = false;
+        if (!error) {
+            const apiKey = req.header("API-KEY");
+            const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+            if (apiKeyVerification.error) {
+                error = true;
+                res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+            }
+        }
+        if (!error) {
+            next();
+        }
+    }, UserController.eliminar),
+    router.route('/'),
+    router.post('/create', UserController.createUser),
+    router.put('/update', (req, res, next) => {
+        let error = false;
+        if (!error) {
+            const apiKey = req.header("API-KEY");
+            const apiKeyVerification = Policies_1.default.verifyApiKey(apiKey);
+            if (apiKeyVerification.error) {
+                error = true;
+                res.status(apiKeyVerification.status).json({ error: true, msg: apiKeyVerification.msg });
+            }
+        }
+        if (!error) {
+            next();
+        }
+    }, UserController.update),
+    router.get('/id', UserController.getById),
     router.get('/clan', UserController.getByClan),
     router.get('/rank', UserController.getByRank);
 module.exports = router;
